@@ -2,5 +2,6 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 
-def main(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
+def main(request, name):
+    string = f"Привет {name}!"
+    return HttpResponse(string)
