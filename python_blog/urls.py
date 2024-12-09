@@ -28,7 +28,7 @@ urlpatterns = [
     path('categories/<slug:categories_slug>', category_datail),
 
     # Теги
-    path('tags', catalog_tags),
+    path('tags/', catalog_tags),
     path('tags/<slug:tags_slug>', tag_detail),
 
     # посты posts/tags
