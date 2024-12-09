@@ -14,7 +14,6 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('djangoProject/', include('djangoProject.urls'))
 """
-import python_blog.urls
 
 # Файл из python_blog.urls
 from django.contrib import admin
@@ -24,14 +23,15 @@ from python_blog.views import catalog_posts, post_detail, catalog_categories, ca
 
 urlpatterns = [
     # категории
-    path('categories/', catalog_categories),
-    path('categories/<slug:categories_slug>', category_datail),
+    path('categories/', catalog_categories, name='categories'),
+    path('categories/<slug:categories_slug>', category_datail, name='category_datail'),
 
     # Теги
-    path('tags/', catalog_tags),
-    path('tags/<slug:tags_slug>', tag_detail),
+    path('tags/', catalog_tags, name='tags'),
+    path('tags/<slug:tags_slug>', tag_detail, name='tag_detail'),
 
-    # посты posts/tags
-    path('', catalog_posts),
-    path('<slug:post_slug>', post_detail),  # /posts/osnovy-python/
+    # посты posts/tags/
+    path('', catalog_posts, name='posts'),
+    path('<slug:post_slug>', post_detail, name='post_detail'),  # /posts/osnovy-python/
+
 ]
