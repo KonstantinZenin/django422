@@ -11,7 +11,13 @@ CATEGORIES = [
 ]
 
 def main(request):
-    return HttpResponse('Главная страница')
+    catalog_categories_url = reverse('blog:categories')
+    catalog_tags_url = reverse('blog:tags')
+    return HttpResponse(f"""
+    <h1>Главная страница<h1>
+    <p><a href="{catalog_categories_url}">Каталог категорий</a></p>
+    <p><a href="{catalog_tags_url}">каталог тегов</a></p>
+    """)
 
 
 def catalog_posts(request):
@@ -25,13 +31,13 @@ def post_detail(request, post_slug):
 def catalog_categories(request):
     links = []
     for category in CATEGORIES:
-        url = reverse('category_datail', args=[category['slug']])
+        url = reverse('blog:category_datail', args=[category['slug']])
         links.append(f'<p><a href="{url}">{category["name"]}</a></p>')
 
     return HttpResponse(f"""
     <h1>Каталог категорий</h1>
     {''.join(links)}
-    <p><a href="{reverse('posts')}">К списку постов</a></p>
+    <p><a href="{reverse('blog:posts')}">К списку постов</a></p>
     """)
 
 
@@ -45,7 +51,7 @@ def category_datail(request, categories_slug):
 
     return HttpResponse(f"""
     <h1>Категория {name}</h1>
-    <p><a href="{reverse('categories')}">Назад к категориям</a></p>
+    <p><a href="{reverse('blog:categories')}">Назад к категориям</a></p>
     """)
 
 
