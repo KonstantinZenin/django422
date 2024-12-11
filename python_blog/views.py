@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.urls import reverse
 
+# python manage.py runserver запуск сервера
+
 CATEGORIES = [
     {'slug': 'python', 'name': 'Python'},
     {'slug': 'django', 'name': 'Django'},
@@ -13,11 +15,8 @@ CATEGORIES = [
 def main(request):
     catalog_categories_url = reverse('blog:categories')
     catalog_tags_url = reverse('blog:tags')
-    return HttpResponse(f"""
-    <h1>Главная страница<h1>
-    <p><a href="{catalog_categories_url}">Каталог категорий</a></p>
-    <p><a href="{catalog_tags_url}">каталог тегов</a></p>
-    """)
+    context = {"title": "Главная", "text": "Текст главной страницы"}
+    return render(request, "main.html", context=context)
 
 
 def catalog_posts(request):
