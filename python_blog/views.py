@@ -15,8 +15,10 @@ CATEGORIES = [
 def main(request):
     catalog_categories_url = reverse('blog:categories')
     catalog_tags_url = reverse('blog:tags')
-    context = {"title": "Главная", "text": "Текст главной страницы",
-               "user_status": "admin"}
+    context = {"title": "Главная",
+               "text": "Текст главной страницы",
+               "user_status": "admin",
+               }
     return render(request, "main.html", context=context)
 
 
@@ -34,11 +36,13 @@ def catalog_categories(request):
         url = reverse('blog:category_datail', args=[category['slug']])
         links.append(f'<p><a href="{url}">{category["name"]}</a></p>')
 
-    return HttpResponse(f"""
-    <h1>Каталог категорий</h1>
-    {''.join(links)}
-    <p><a href="{reverse('blog:posts')}">К списку постов</a></p>
-    """)
+    context = {
+        'title': "Категории",
+        'text': "Текст страницы с категориями",
+        "categories": CATEGORIES,
+    }
+
+    return render(request, "catalog_categories.html", context=context)
 
 
 def category_datail(request, categories_slug):
