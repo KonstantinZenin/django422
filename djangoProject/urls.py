@@ -20,7 +20,7 @@ from django.urls import include
 # Общий префикс posts/
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', main),
+    path('', main, name="main"),
     # Подключаем python_blog.urls
     path('posts/', include('python_blog.urls'))
 ]
