@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Title</title>
+</head>
+<body>
+    <h1>{{ title }}</h1>
+    <p>{{ text }}</p>
+    <hr>
+    {% comment %} Цикл шаблонизатора {% endcomment %}
+    {% for category in categories %}
+        <p>Это категория: {{ category.name }}</p>
+        <p>Слаг: {{ category.slug }}</p>
+        {% comment %} Так делать ссылки можно но не нужно(будут проблемы при изменении проекта) {% endcomment %}
+        <a href="{{ category.slug }}"> {{ category.name }}</a>
+        {% comment %} Правильный вариант который будет работать через псевдонимы! {% endcomment %}
+        <a href="{% url "blog:category_datail" category.slug %}">{{ category.name }}</a>
+        <hr>
+    {% endfor %}
+
+</body>
+</html>
