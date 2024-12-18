@@ -4,13 +4,6 @@ from django.urls import reverse
 
 # python manage.py runserver запуск сервера
 
-MENU_ITEMS = [
-    {"title": "Главная", "url_name": "main"},
-    {"title": "Все посты", "url_name": "blog:posts"},
-    {"title": "Категории", "url_name": "blog:categories"},
-    {"title": "Теги", "url_name": "blog:tags"},
-]
-
 CATEGORIES = [
     {'slug': 'python', 'name': 'Python'},
     {'slug': 'django', 'name': 'Django'},
@@ -25,7 +18,7 @@ def main(request):
     context = {"title": "Главная",
                "text": "Текст главной страницы",
                "user_status": "admin",
-               "menu_items": MENU_ITEMS,
+               # "menu_items": MENU_ITEMS,
                }
     return render(request, "main.html", context=context)
 
