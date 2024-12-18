@@ -4,6 +4,7 @@
 'python_blog.context_processors.'
 """
 
+
 def menu_items(request):
     menu = [
         {"title": "Главная", "url_name": "main"},
@@ -12,7 +13,7 @@ def menu_items(request):
         {"title": "Теги", "url_name": "blog:tags"},
     ]
 
-    # Определяет активный пункт меню
+    # Определяем активный пункт меню
     current_url_name = request.resolver_match.view_name
 
     for item in menu:
