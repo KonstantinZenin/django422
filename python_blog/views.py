@@ -18,7 +18,7 @@ def main(request):
     context = {"title": "Главная",
                "text": "Текст главной страницы",
                "user_status": "admin",
-               "active_page": "blog:categories",
+               "active_page": "main",
                }
     return render(request, "main.html", context=context)
 
@@ -41,6 +41,7 @@ def catalog_categories(request):
         'title': "Категории",
         'text': "Текст страницы с категориями",
         "categories": CATEGORIES,
+        "active_page": "blog:categories"
     }
 
     return render(request, "catalog_categories.html", context=context)
