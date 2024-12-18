@@ -18,7 +18,7 @@ def main(request):
     context = {"title": "Главная",
                "text": "Текст главной страницы",
                "user_status": "admin",
-               # "menu_items": MENU_ITEMS,
+               "active_page": "blog:categories",
                }
     return render(request, "main.html", context=context)
 
