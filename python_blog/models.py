@@ -64,4 +64,24 @@ DELETE
  WHERE "python_blog_post"."id" IN (3)
 Execution time: 0.006675s [Database: default]
 
+3. Получить пост по id
+post_1 = Post.objects.get(id=1) # id - поле модели id -это поле, которое автоматически генерируется Django/
+post_1 = Post.objects.get(id=1) # pk - primary key - первичны ключ
+
+4. Получим все посты и сортируем их по полю created_at от новых к старым
+posts = Post.objects.all().order_by("-created_at")
+
+SELECT "python_blog_post"."id",
+       "python_blog_post"."title",
+       "python_blog_post"."content",
+       "python_blog_post"."created_at",
+       "python_blog_post"."updated_at",
+       "python_blog_post"."category"
+  FROM "python_blog_post"
+ ORDER BY "python_blog_post"."created_at" DESC
+ 
+5. Используя filter получим посты где категория NULL
+posts = Post.objects.filter(category=None)
+Применим к полученному QuerySet сортировку
+posts = Post.objects.order_by("-created_at")
 """
