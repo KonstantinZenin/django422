@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
+from unidecode import unidecode
 
 
 class Post(models.Model):
@@ -43,7 +44,7 @@ class Category(models.Model):
         :param kwargs:
         :return:
         """
-        self.slug = slugify(self.name)
+        self.slug = slugify(unidecode(self.name))
         super().save(*args, **kwargs)
 
     class Meta:   # Вложенный класс с настройками
@@ -191,5 +192,5 @@ django_posts = Post.objects.filter(category__name='Django')
 category_6 = Category(name='Linux Avrora').save()
 category_7 = Category(name='Добрый добрый JS').save()
 category_8 = Category(name='Постгра').save()
-category_8 = Category(name='Оракл').save()
+category_9 = Category(name='Оракл БД').save()
 """
