@@ -5,13 +5,6 @@ from .blog_data import dataset
 
 # python manage.py runserver запуск сервера
 
-CATEGORIES = [
-    {'slug': 'python', 'name': 'Python'},
-    {'slug': 'django', 'name': 'Django'},
-    {'slug': 'postgresql', 'name': 'PostgreSQL'},
-    {'slug': 'docker', 'name': 'Docker'},
-    {'slug': 'linux', 'name': 'Linux'},
-]
 
 def main(request):
     catalog_categories_url = reverse('blog:categories')
