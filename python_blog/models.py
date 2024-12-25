@@ -1,4 +1,6 @@
 from django.db import models
+from django.urls import reverse
+from django.utils.text import slugify
 
 
 class Post(models.Model):
@@ -17,9 +19,39 @@ class Post(models.Model):
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=100)
-    slug = models.SlugField(max_length=250, unique=True)
-    description = models.TextField(blank=True, null=True, default="Без описания")
+    name = models.CharField(max_length=200, verbose_name="Название")  # verbose_name - Человеко читаемое название
+    slug = models.SlugField(max_length=250, unique=True, verbose_name="Слаг")
+    description = models.TextField(blank=True, null=True, default="Без описания", verbose_name="Описание")
+
+    def __str__(self):  # Как это будут видеть в админке и шаблонах
+        return self.name
+
+    def get_absolute_url(self):
+        """
+        Метод возвращает абсолютный URL категории.
+        В админке Django, при создании или редактировании категории, будет
+        ссылка "Посмотреть на сайте". В шаблонах тоже удобно вызывать его
+        :return:
+        """
+        return reverse("blog:category_detail", args=[self.slug])
+
+    def save(self, *args, **kwargs):
+        """
+        Служебный метод для сохранения объекта в базе данных.
+        Мы расширяем его что бы изменить логику сохранения объекта.
+        :param args:
+        :param kwargs:
+        :return:
+        """
+        self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
+
+    class Meta:   # Вложенный класс с настройками
+        verbose_name = "Категория"  # Единственное число для админки
+        verbose_name_plural = "Категории"  # Множественное число для админки
+        ordering = ['name']  # Сортировка по умолчанию
+
+
 
 
 # PRICTICE - Работа с моделью Post
@@ -151,4 +183,13 @@ django_posts = Post.objects.filter(category=category)
 
 # или
 django_posts = Post.objects.filter(category__name='Django')
+
+##### После обновления Category
+
+Попробуем создать категорию
+
+category_6 = Category(name='Linux Avrora').save()
+category_7 = Category(name='Добрый добрый JS').save()
+category_8 = Category(name='Постгра').save()
+category_8 = Category(name='Оракл').save()
 """
